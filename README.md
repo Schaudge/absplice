@@ -31,7 +31,7 @@ On the input page, you should provide the variants you want to run AbSplice on a
 * Delta PSI
 * Delta score
 
-> _For the explicit description of the AbSplice output columns see [Output](https://github.com/gagneurlab/absplice?tab=readme-ov-file#output) section._
+> _For the explicit description of the AbSplice output columns see [Output](#output) section._
 
 You can sort values in the columns and filter the output table for a specific variant, gene ID, tissue or AbSplice score cutoff.
 
