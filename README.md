@@ -18,6 +18,16 @@ The source code to create and use SpliceMaps is under [MIT license](https://gith
 
 ## How to use AbSplice
 
+### UCSC browser track
+
+Precomputed AbSplice scores for all SNVs in protein-coding genes are available as a [UCSC browser track](https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=2338955748_SgIatoRKz41Udd423gAW0fOgEDA8&g=abSplice&hgTracksConfigPage=configure). The displayed scores are colored with respect to three cutoffs:
+* High (red) - An AbSplice score over 0.2 (high likelihood of aberrant splicing in at least one tissue).
+* Medium (orange) - A score between 0.05 and 0.2 (medium likelihood).
+* Low (blue) - A score between 0.01 and 0.05 (low likelihood).
+* Scores below the lowest cutoff (<0.01) are not displayed.
+
+Mouseover on items shows the gene name, maximum score, and tissues that had this score. Clicking on any item brings up a table with scores for all 49 GTEX tissues.
+
 ### Web interface
 
 You can easily run AbSplice-DNA on arbitrary variants using our web interface at [https://absplice.cmm.cit.tum.de](https://absplice.cmm.cit.tum.de). The web interface uses AbSplice precomputed scores to retrieve SNVs (takes less than a second per variant) and runs AbSplice for indels (can take up to several seconds per variant).
