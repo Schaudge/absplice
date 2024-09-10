@@ -2,12 +2,12 @@ name: spliceai-rocksdb
 channels:
   - conda-forge
 dependencies:
-  - python>=3.6
+  - python==3.9
   - python-rocksdb>=0.7
   - rocksdb
-  - tensorflow-gpu>=2.4
+  - tensorflow-gpu==2.6.2
   - cudnn
-  - cudatoolkit>=11.0
+  - cudatoolkit==11.0.3
   - pyarrow
   - tqdm
   - pip
@@ -20,3 +20,5 @@ dependencies:
   - bioconda::cyvcf2
   - pip:
     - git+https://github.com/gagneurlab/spliceai_rocksdb.git@master
+    - numpy==1.19.5
+    - pandas==1.4.4
