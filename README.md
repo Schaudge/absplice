@@ -75,6 +75,10 @@ Clone the AbSplice repository to the container:
 git clone https://github.com/gagneurlab/absplice.git
 cd absplice
 ```
+Install the AbSplice package:
+```
+pip install -e .
+```
 ### Installation with creating a conda environment
 
 Clone git repo:
