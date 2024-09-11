@@ -16,8 +16,41 @@ AbSplice-RNA: if RNA-seq from clinically accessible tissues (e.g. blood or skin)
 ## License
 The source code to create and use SpliceMaps is under [MIT license](https://github.com/gagneurlab/absplice/tree/master/license/MIT.txt). Pre-computed SpliceMaps are under [MIT license](https://github.com/gagneurlab/absplice/tree/master/license/MIT.txt). The source code of AbSplice is under [MIT license](https://github.com/gagneurlab/absplice/tree/master/license/MIT.txt). The pre-trained AbSplice models as well as the pre-computed AbSplice scores are under the [CC BY NC 4.0 license](https://github.com/gagneurlab/absplice/tree/master/license/CC_BY_NC_4.0.txt) for academic and non-commercial use. This is because the implementation of running AbSplice predictions makes use of trained SpliceAI models which are currently under the CC BY NC 4.0 by Illumina (as of 21st December 2023).
 
-## Installation
-### With container
+## How to use AbSplice
+
+### UCSC browser track
+
+Precomputed AbSplice scores for all SNVs in protein-coding genes are available as a [UCSC browser track](https://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=2338955748_SgIatoRKz41Udd423gAW0fOgEDA8&g=abSplice&hgTracksConfigPage=configure). The displayed scores are colored with respect to three cutoffs:
+* High (red) - An AbSplice score over 0.2 (high likelihood of aberrant splicing in at least one tissue).
+* Medium (orange) - A score between 0.05 and 0.2 (medium likelihood).
+* Low (blue) - A score between 0.01 and 0.05 (low likelihood).
+* Scores below the lowest cutoff (<0.01) are not displayed.
+
+Mouseover on items shows the gene name, maximum score, and tissues that had this score. Clicking on any item brings up a table with scores for all 49 GTEX tissues.
+
+### Web interface
+
+You can easily run AbSplice-DNA on arbitrary variants using our web interface at [https://absplice.cmm.cit.tum.de](https://absplice.cmm.cit.tum.de). The web interface uses AbSplice precomputed scores to retrieve SNVs (takes less than a second per variant) and runs AbSplice for indels (can take up to several seconds per variant).
+
+On the input page, you should provide the variants you want to run AbSplice on and choose the genome version (hg19 or hg38). The output will be shown as a web page and can be exported as a CSV file. On the output page you will find the result table containing seven columns:
+* Variant
+* Gene ID (Ensembl gene ID)
+* Gene name (all gene names the gene has or used to have)
+* Tissue
+* AbSplice score (the column's coloring represents 3 AbSplice cutoffs; red: score is above the high cutoff (>0.2), orange: below the high cutoff (0.2) and above the medium (0.05), yellow: below the medium (0.05) and above the low (0.01), green: below the low cutoff (<0.01))
+* Delta PSI
+* Delta score
+
+> _For the explicit description of the AbSplice output columns see [Output](#output) section._
+
+You can sort values in the columns and filter the output table for a specific variant, gene ID, tissue or AbSplice score cutoff.
+
+Additionally, in the "Advanced settings" section, you can choose options to:
+* Add extra information from the SpliceMap to the output: on the web page you will see additional columns "Splice site is expressed", "Junction", "Splice site", "Reference PSI", in the attached output CSV you will find the complete AbSplice output (Note that this option increases the running time for SNVs as it forces AbSplice to compute scores instead of retrieving them from the database)
+* Display only the maximum score across tissues per variant (can be used for faster prioritization of the input variants; in the attached output CSV file you will find scores for all tissues)
+* Run AbSplice only on a subset of tissues
+
+### Installation with container
 
 Instead of Docker you can also use Podman (you just need to replace `docker` with `podman` in all the commands).
 
@@ -42,7 +75,11 @@ Clone the AbSplice repository to the container:
 git clone https://github.com/gagneurlab/absplice.git
 cd absplice
 ```
-### With creating a conda environment
+Install the AbSplice package:
+```
+pip install -e .
+```
+### Installation with creating a conda environment
 
 Clone git repo:
 ```
